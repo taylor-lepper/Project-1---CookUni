@@ -322,10 +322,10 @@
 								</div>
 								<div class="actions">
 									<button
-										id="edit"
+										id="viewRecipeProfileBtn"
 										name="viewRecipeProfileBtn"
 										class="btn btn-info"
-										onclick="viewRecipe('{{_id}}')"
+										onclick="viewRecipe('{{this._id}}')"
 									>View the recipe</button>
 								</div>
 							</div>
@@ -349,20 +349,23 @@
 				<div id="recipeContainer" class="row form-layout p-5">
 					<div class="col-md-12">
 						<div class="recepieInfo">
-							<div id="loadView" class="loading">
-								<h1>Loading.............</h1>
-								<img
-									id="loading-gif"
-									src="images/loadingGIF.gif"
-									alt="loading"
-								/>
-							</div>
+
 							<div class="detailsFoodImage">
+								<div id="loadView" class="loading">
+									<h1>Loading.............</h1>
+									<img
+										id="loading-gif"
+										src="images/loadingGIF.gif"
+										alt="loading"
+									/>
+								</div>
 								<img src="{{foodImageURL}}" alt="" />
+
 							</div>
 
 							<div class="infoPack">
 								<h3 class="my-3">{{meal}}</h3>
+
 								<p class="prep-method">{{prepMethod}}</p>
 								<p class="description">{{description}}</p>
 							</div>
@@ -377,6 +380,7 @@
 									id="edit"
 									class="btn btn-info"
 								>Edit</button>
+
 								<button id="like" class="btn btn-success">
 									{{likesCounter}}
 									likes</button>
@@ -391,6 +395,7 @@
 								{{/each}}
 							</ul>
 						</div>
+
 					</div>
 				</div>
 			</script>

@@ -13,6 +13,8 @@ function home() {
 		//...nav bar hides
 		document.getElementById("loggedHide1").className = "hidden";
 		document.getElementById("loggedHide2").className = "hidden";
+	} else {
+		anonymous();
 	}
 
 	//...fetch headers, token
@@ -84,6 +86,9 @@ function home() {
 }
 
 function share() {
+	if (loggedIn == false) {
+		anonymous();
+	}
 	let src = document.getElementById("share").innerHTML;
 	let template = Handlebars.compile(src);
 	let context = {};
@@ -93,6 +98,9 @@ function share() {
 
 function profile() {
 	console.log(userId);
+	if (loggedIn == false) {
+		anonymous();
+	}
 
 	//...headers and url for fetch
 	let url = "https://canary-baas.kinvey.com/appdata/kid_BkNEDN87K/Recipes";
@@ -117,6 +125,9 @@ function profile() {
 			// get the template as a handlebars string
 			console.log(data);
 
+			if (loggedIn == false) {
+				anonymous();
+			}
 			//...create user only recipes
 			let recipesArr = Object.entries(data);
 
@@ -168,6 +179,9 @@ function profile() {
 }
 
 function logout() {
+	if (loggedIn == false) {
+		anonymous();
+	}
 	let src = document.getElementById("logout").innerHTML;
 	let template = Handlebars.compile(src);
 	let context = {};
@@ -202,7 +216,9 @@ function anonymous() {
 
 function editRecipe(recipe) {
 	console.log(recipe);
-
+	if (loggedIn == false) {
+		anonymous();
+	}
 	//...button
 	let editRecipeBtn = document.getElementById("editRecipeBtn");
 
@@ -234,7 +250,9 @@ function editRecipe(recipe) {
 
 function viewRecipe(recipeID) {
 	// console.log(recipeID);
-
+	if (loggedIn == false) {
+		anonymous();
+	}
 	let token =
 		"Basic a2lkX0JrTkVETjg3Szo5NjE3YjIxMzVlZDE0ZWM4YWMyZjUyZGZmODJiMjczYw==";
 
@@ -246,6 +264,11 @@ function viewRecipe(recipeID) {
 			Authorization: token,
 		},
 	};
+	console.log("view recipe clicked");
+	if (document.getElementById("loadView")) {
+		document.getElementById("loadView").style.display = "block";
+	}
+
 	fetch(url, headers)
 		.then(function (response) {
 			console.log(response);
@@ -265,6 +288,13 @@ function viewRecipe(recipeID) {
 			let context = recipe;
 			let html = template(context);
 			render(html);
+			if (loggedIn == false) {
+				anonymous();
+			}
+
+			if (document.getElementById("loadView")) {
+				document.getElementById("loadView").style.display = "none";
+			}
 
 			//...hide buttons
 			if (userId == creator) {
@@ -331,6 +361,7 @@ function viewRecipe(recipeID) {
 					.getElementById("edit")
 					.addEventListener("click", function () {
 						console.log("edit clicked");
+
 						editRecipe(recipe);
 					});
 			}
@@ -364,15 +395,22 @@ function viewRecipe(recipeID) {
 						console.log(headers);
 
 						//...send edit to database
+						if (document.getElementById("loadView")) {
+							document.getElementById("loadView").style.display =
+								"block";
+						}
 
-						// document.getElementById("loadEdit").style.display = "block";
 						fetch(url, headers)
 							.then(function (response) {
 								console.log(response);
 								return response.json();
 							})
 							.then(function (data) {
-								// document.getElementById("loadEdit").style.display = "none";
+								if (document.getElementById("loadView")) {
+									document.getElementById(
+										"loadView"
+									).style.display = "none";
+								}
 								console.log(data);
 								viewRecipe(data._id);
 								return;
@@ -398,6 +436,9 @@ function viewRecipe(recipeID) {
 }
 
 function editRecipeSubmit() {
+	if (loggedIn == false) {
+		anonymous();
+	}
 	console.log("clicked edit recipe submit");
 	let hashSplit = hashRoute.split("/");
 	let recipeId = hashSplit[1];
