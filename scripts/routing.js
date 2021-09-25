@@ -125,9 +125,6 @@ function profile() {
 			// get the template as a handlebars string
 			console.log(data);
 
-			if (loggedIn == false) {
-				anonymous();
-			}
 			//...create user only recipes
 			let recipesArr = Object.entries(data);
 
@@ -154,22 +151,92 @@ function profile() {
 				let context = { finalArr };
 				let html = template(context);
 				render(html);
-
+				if (loggedIn == false) {
+					anonymous();
+				}
 				//...change for recipes found message
-				document.getElementById("noRecipesProfile").className =
-					"hidden";
-				document.getElementById("recipesFoundProfile").className = "";
+				if (document.getElementById("noRecipesProfile")) {
+					document.getElementById("noRecipesProfile").className =
+						"hidden";
+				}
+				if (document.getElementById("recipesFoundProfile")) {
+					document.getElementById("recipesFoundProfile").className =
+						"";
+				}
+
+				document.addEventListener("click", function (e) {
+					console.log("document click event");
+					let buttonId = e.path[0].id;
+					console.log(buttonId);
+
+					if (
+						buttonId == "padwan" ||
+						buttonId == "" ||
+						buttonId == "hide1" ||
+						buttonId == "hide2" ||
+						buttonId == "hide3" ||
+						buttonId == "navBar" ||
+						buttonId == "createBtn" ||
+						buttonId == "logoutBtn" ||
+						buttonId == "loggedHide1" ||
+						buttonId == "defaultRegisterFormUsername" ||
+						buttonId == "defaultRegisterFormPassword" ||
+						buttonId == "logInBtn" ||
+						buttonId == "defaultRecepieShareMeal" ||
+						buttonId == "defaultRecepieShareIngredients" ||
+						buttonId == "defaultRecepieShareMethodOfPreparation" ||
+						buttonId == "defaultRecepieShareDescription" ||
+						buttonId == "defaultRecepieShareFoodImageURL" ||
+						buttonId == "selectCategory" ||
+						buttonId == "archive" ||
+						buttonId == "edit" ||
+						buttonId == "like" ||
+						buttonId == "defaultRegisterFormFirstName" ||
+						buttonId == "defaultRegisterFormLastName" ||
+						buttonId == "defaultRegisterRepeatPassword" ||
+						buttonId == "registerButton" ||
+						buttonId == "viewRecipeATag" ||
+						buttonId == "editRecipeBtn" ||
+						buttonId == "defaultRecepieEditMeal" ||
+						buttonId == "defaultRecepieEditIngredients" ||
+						buttonId == "defaultRecepieEditMethodOfPreparation" ||
+						buttonId == "defaultRecepieEditDescription" ||
+						buttonId == "defaultRecepieEditFoodImageURL" ||
+						buttonId == "defaultRecipeEditFoodCategory" ||
+						buttonId == "rooter" ||
+						buttonId == "container" ||
+						buttonId == "viewRecipe" ||
+						buttonId == "recipeContainer" ||
+						buttonId == "create-recipe" ||
+						buttonId == "smallerFont" ||
+						buttonId == "edit-receipt-form" ||
+						// buttonId == "rooter" ||
+						// buttonId == "rooter" ||
+						buttonId == "loggedHide2"
+					) {
+						return;
+					} else {
+						viewRecipe(buttonId);
+						return;
+					}
+				});
 			} else {
 				let src = document.getElementById("profile").innerHTML;
 				let template = Handlebars.compile(src);
 				let context = {};
 				let html = template(context);
 				render(html);
-
+				if (loggedIn == false) {
+					anonymous();
+				}
 				//...change for no recipes found message
-				document.getElementById("noRecipesProfile").className = "";
-				document.getElementById("recipesFoundProfile").className =
-					"hidden";
+				if (document.getElementById("noRecipesProfile")) {
+					document.getElementById("noRecipesProfile").className = "";
+				}
+				if (document.getElementById("recipesFoundProfile")) {
+					document.getElementById("recipesFoundProfile").className =
+						"hidden";
+				}
 			}
 		})
 		.catch((err) => {
@@ -253,6 +320,7 @@ function viewRecipe(recipeID) {
 	if (loggedIn == false) {
 		anonymous();
 	}
+
 	let token =
 		"Basic a2lkX0JrTkVETjg3Szo5NjE3YjIxMzVlZDE0ZWM4YWMyZjUyZGZmODJiMjczYw==";
 

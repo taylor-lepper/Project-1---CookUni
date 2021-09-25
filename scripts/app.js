@@ -41,6 +41,29 @@ function registerForm() {
 		}),
 	};
 
+	//...validations
+	if (firstName.value.length < 2) {
+		$.notify("First name must be at least 3 characters long", "error");
+		return;
+	}
+	if (lastName.value.length < 2) {
+		$.notify("Last name must be at least 3 characters long", "error");
+		return;
+	}
+	if (userName.value.length < 3) {
+		$.notify("Username must be at least 3 characters long", "error");
+		return;
+	}
+	if (password.value.length < 6) {
+		$.notify("Password must be at least 6 characters long", "error");
+		return;
+	}
+	if (password.value !== password2.value) {
+		$.notify("Passwords must be equal", "error");
+		return;
+	}
+
+	//...successful login
 	if (password.value == password2.value) {
 		if ((registerEvent = {})) {
 			document.getElementById("loadRegister").style.display = "block";

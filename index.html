@@ -80,7 +80,8 @@
 
 			<script id="home" type="text/x-handlebars-template">
 				<h1 class="text-center">Our Recipes</h1>
-
+				<h5 id="smallerFont" class="text-center">To view your recipes,
+					click your name above!</h5>
 				<!-- food not found -->
 
 				<div id="foodNotFound">
@@ -116,8 +117,10 @@
 													{{/each}}
 												</ul>
 
-												<a href="#details/{{id}}">View
-													the recipe</a>
+												<a
+													id="viewRecipeATag"
+													href="#details/{{id}}"
+												>View the recipe</a>
 											</div>
 
 											<img
@@ -286,9 +289,6 @@
 					<h4>Your Recipes</h4>
 					<ul>
 						<li>To view a recipe, click the "View the recipe" link.</li>
-						<li>Has a bug....</li>
-						<li>(You can still click it!)</li>
-
 					</ul>
 
 				</div>
@@ -322,10 +322,9 @@
 								</div>
 								<div class="actions">
 									<button
-										id="viewRecipeProfileBtn"
+										id="{{_id}}"
 										name="viewRecipeProfileBtn"
 										class="btn btn-info"
-										onclick="viewRecipe('{{this._id}}')"
 									>View the recipe</button>
 								</div>
 							</div>

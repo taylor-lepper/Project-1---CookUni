@@ -12,6 +12,11 @@ a:hover {
 
 /* Custom default button */
 
+#smallerFont {
+	font-size: 85%;
+	margin-top: -6%;
+}
+
 #archive,
 #archiveProfile {
 	color: #fff;
