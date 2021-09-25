@@ -1,3 +1,3 @@
 Run "npm install" before continue!
 
-Let's commit to this!
+Hello everyone this is Taylor's project. 1st commit attempt update!
