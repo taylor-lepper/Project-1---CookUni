@@ -297,7 +297,7 @@ function editRecipe(recipe) {
 	render(html);
 
 	//...set defaults
-	document.getElementById("defaultRecepieEditMeal").placeholder = recipe.meal;
+	document.getElementById("defaultRecepieEditMeal").value = recipe.meal;
 	if (recipe.ingredients) {
 		document.getElementById("defaultRecepieEditIngredients").value =
 			recipe.ingredients.join(", ");
